@@ -1,0 +1,6 @@
+[submodule "jenkins-x-nodejs-consumer"]
+	path = jenkins-x-nodejs-consumer
+	url = git@github.com:mersed/jenkins-x-nodejs-consumer.git
+[submodule "jenkins-x-nodejs-api-server"]
+	path = jenkins-x-nodejs-api-server
+	url = git@github.com:mersed/jenkins-x-nodejs-api-server.git
