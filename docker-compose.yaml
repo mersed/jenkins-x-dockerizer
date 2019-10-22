@@ -1,0 +1,52 @@
+version: '3.3'
+services:
+  api-server:
+    build:
+      context: ./jenkins-x-nodejs-api-server
+      dockerfile: DockerFile
+    volumes:
+      - ./jenkins-x-nodejs-api-server/app:/opt/jenkins-x-nodejs-api-server/app
+    ports:
+      - target: 3000
+        published: 80
+        mode: host
+    networks:
+      - fems-network
+
+  consumer:
+    build:
+      context: ./jenkins-x-nodejs-consumer
+      dockerfile: DockerFile
+    volumes:
+      - ./jenkins-x-nodejs-consumer/app:/opt/jenkins-x-nodejs-consumer/app
+    networks:
+      - fems-network
+
+  postgres:
+    image: postgres:9.6.3
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ~/volumes/sequelize/postgresql/data:/var/lib/postgresql/data
+      - ./scripts/create-database:/docker-entrypoint-initdb.d
+    environment:
+      # databases ending in _development will be reset every time the app starts
+      POSTGRES_MULTIPLE_DATABASES: jenkinsx
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+    networks:
+      - fems-network
+
+  pgadmin:
+    image: thajeztah/pgadmin4
+    container_name: pgadmin
+    ports:
+      - "5050:5050"
+    volumes:
+      - ~/DockerSpace/volumes/sequelize/pgadmin:/pgadmin
+    networks:
+      - fems-network
+
+networks:
+  fems-network:
