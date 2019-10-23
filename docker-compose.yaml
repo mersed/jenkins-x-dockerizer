@@ -42,7 +42,7 @@ services:
     ports:
       - "5050:5050"
     volumes:
-      - ~/DockerSpace/volumes/sequelize/pgadmin:/pgadmin
+      - ~/DockerSpace/volumes/pgadmin:/pgadmin
     networks:
       - fems-network
 
