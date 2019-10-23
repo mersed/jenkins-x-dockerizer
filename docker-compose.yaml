@@ -8,8 +8,6 @@ services:
       - ./jenkins-x-nodejs-api-server/app:/opt/jenkins-x-nodejs-api-server/app
     ports:
       - target: 3000
-        published: 80
-        mode: host
     networks:
       - fems-network
 
