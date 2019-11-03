@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  containers:
+    - name: postgres
+      image: postgres:9.6.3
+      env:
+        - name: POSTGRES_USER
+          value: "admin"
+        - name: POSTGRES_PASSWORD
+          value: "password"
+        - name: POSTGRES_DB
+          value: "jenkinsx"
+      ports:
+        - containerPort: 5432
+          name: postgres-port
